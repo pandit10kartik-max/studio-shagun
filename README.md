@@ -32,7 +32,7 @@ public/
 ```
 
 ### Step 3: Update the Image Array
-Open `app/ShangunStudio.js` and edit the `weddingImages` array at the top:
+Open `app/studioshagun.js` and edit the `weddingImages` array at the top:
 
 ```js
 const weddingImages = [
@@ -128,7 +128,7 @@ vercel
 
 ## Custom Domain (Optional)
 1. Go to your Vercel project → Settings → Domains
-2. Add your domain: `shangunstudio.com`
+2. Add your domain: `studioshagun.com`
 3. Update DNS records as shown by Vercel
 4. SSL is automatic!
 

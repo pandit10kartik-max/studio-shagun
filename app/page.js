@@ -1,6 +1,6 @@
 'use client'
-import ShangunStudio from './ShangunStudio'
+import ShagunStudio from './studioshagun'
 
 export default function Home() {
-  return <ShangunStudio />
+  return <ShagunStudio />
 }

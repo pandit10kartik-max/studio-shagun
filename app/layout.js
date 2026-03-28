@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Shangun Studio | Wedding Photography',
-  description: 'Capturing timeless wedding moments - Shangun Studio',
+  title: 'Studio Shagun | Wedding Photography',
+  description: 'Capturing timeless wedding moments - Studio Shagun',
 }
 
 export default function RootLayout({ children }) {
