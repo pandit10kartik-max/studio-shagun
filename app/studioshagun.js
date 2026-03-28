@@ -1189,10 +1189,7 @@ export default function ShagunStudio() {
       <div className="app">
         {/* NAV */}
         <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-          <div className="nav-brand">
-            <div className="nav-camera-icon"><CameraIcon size={22} color="var(--gold)" /></div>
-            <div className="nav-logo">Shagun <span>Studio</span></div>
-          </div>
+          
           <ul className="nav-links">
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#about">About</a></li>
