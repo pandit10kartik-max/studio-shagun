@@ -47,6 +47,7 @@ export default function ShagunStudio() {
   const [flash, setFlash] = useState(false);
   const [shutterActive, setShutterActive] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
+  const [splashPhase, setSplashPhase] = useState(0);
   const [visibleItems, setVisibleItems] = useState(new Set());
   const galleryRef = useRef(null);
 
@@ -54,10 +55,14 @@ export default function ShagunStudio() {
     ? weddingImages
     : weddingImages.filter(img => img.category === filter);
 
-  // Intro shutter animation
+  // Splash camera animation phases
   useEffect(() => {
-    const t = setTimeout(() => setIntroComplete(true), 2800);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => setSplashPhase(1), 800);
+    const t2 = setTimeout(() => setSplashPhase(2), 1600);
+    const t3 = setTimeout(() => setSplashPhase(3), 1900);
+    const t4 = setTimeout(() => setSplashPhase(4), 2300);
+    const t5 = setTimeout(() => setIntroComplete(true), 3200);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
   }, []);
 
   useEffect(() => {
@@ -151,78 +156,190 @@ export default function ShagunStudio() {
           --red-focus: #C0392B;
         }
 
-        /* ===== INTRO SHUTTER ===== */
-        .intro-shutter {
+        /* ===== CAMERA SPLASH ===== */
+        .splash {
           position: fixed;
           inset: 0;
           z-index: 9999;
-          background: var(--dark);
+          background: #080808;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: opacity 0.8s ease, visibility 0.8s ease;
+          overflow: hidden;
+        }
+
+        .splash.done { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        .splash-grid {
+          position: absolute;
+          inset: 0;
+          background: 
+            linear-gradient(to right, transparent 33.2%, rgba(255,255,255,0.05) 33.3%, rgba(255,255,255,0.05) 33.4%, transparent 33.5%, transparent 66.5%, rgba(255,255,255,0.05) 66.6%, rgba(255,255,255,0.05) 66.7%, transparent 66.8%),
+            linear-gradient(to bottom, transparent 33.2%, rgba(255,255,255,0.05) 33.3%, rgba(255,255,255,0.05) 33.4%, transparent 33.5%, transparent 66.5%, rgba(255,255,255,0.05) 66.6%, rgba(255,255,255,0.05) 66.7%, transparent 66.8%);
+        }
+
+        .splash-focus {
+          position: relative;
+          width: 160px;
+          height: 160px;
+          z-index: 1;
+        }
+
+        .splash-bracket {
+          position: absolute;
+          width: 28px;
+          height: 28px;
+          border-color: rgba(255,255,255,0.5);
+          border-style: solid;
+          border-width: 0;
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .splash-bracket.tl { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; }
+        .splash-bracket.tr { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; }
+        .splash-bracket.bl { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; }
+        .splash-bracket.br { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; }
+
+        .splash.phase1 .splash-bracket,
+        .splash.phase2 .splash-bracket {
+          border-color: #4ADE80;
+          width: 20px;
+          height: 20px;
+        }
+
+        .splash-dot {
+          position: absolute;
+          top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+          width: 6px; height: 6px;
+          background: rgba(255,255,255,0.3);
+          border-radius: 50%;
+          transition: all 0.3s;
+        }
+
+        .splash.phase1 .splash-dot { background: #4ADE80; box-shadow: 0 0 12px #4ADE80; }
+
+        .splash-cross {
+          position: absolute;
+          inset: 0;
+        }
+
+        .splash-cross::before, .splash-cross::after {
+          content: '';
+          position: absolute;
+          background: rgba(255,255,255,0.12);
+        }
+
+        .splash-cross::before { top: 50%; left: 0; right: 0; height: 1px; }
+        .splash-cross::after { left: 50%; top: 0; bottom: 0; width: 1px; }
+
+        .splash-shutter-top, .splash-shutter-bottom {
+          position: absolute;
+          left: 0; right: 0;
+          height: 50%;
+          background: #000;
+          z-index: 2;
+          transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .splash-shutter-top { top: 0; transform: translateY(-100%); }
+        .splash-shutter-bottom { bottom: 0; transform: translateY(100%); }
+
+        .splash.phase2 .splash-shutter-top { transform: translateY(0); }
+        .splash.phase2 .splash-shutter-bottom { transform: translateY(0); }
+
+        .splash-flash {
+          position: absolute;
+          inset: 0;
+          background: white;
+          z-index: 3;
+          opacity: 0;
+        }
+
+        .splash.phase3 .splash-flash { animation: splashFlash 0.5s ease-out forwards; }
+        .splash.phase3 .splash-shutter-top { transform: translateY(-100%); }
+        .splash.phase3 .splash-shutter-bottom { transform: translateY(100%); }
+
+        @keyframes splashFlash {
+          0% { opacity: 1; }
+          30% { opacity: 0.7; }
+          100% { opacity: 0; }
+        }
+
+        .splash-hud-top {
+          position: absolute;
+          top: 20px; left: 0; right: 0;
+          display: flex;
+          justify-content: space-between;
+          padding: 0 28px;
+          font-size: 10px;
+          letter-spacing: 2px;
+          color: rgba(255,255,255,0.35);
+          font-family: 'Outfit', sans-serif;
+          z-index: 1;
+        }
+
+        .splash-rec {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: #EF4444;
+        }
+
+        .splash-rec::before {
+          content: '';
+          width: 7px; height: 7px;
+          border-radius: 50%;
+          background: #EF4444;
+          animation: recBlink 1s ease infinite;
+        }
+
+        .splash-hud-bottom {
+          position: absolute;
+          bottom: 20px; left: 0; right: 0;
+          display: flex;
+          justify-content: center;
+          gap: 24px;
+          font-size: 10px;
+          letter-spacing: 2px;
+          color: rgba(255,255,255,0.3);
+          font-family: 'Outfit', sans-serif;
+          z-index: 1;
+        }
+
+        .splash-hud-bottom span { color: var(--gold); }
+
+        .splash-captured {
+          position: absolute;
+          inset: 0;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-direction: column;
-          transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .intro-shutter.done {
           opacity: 0;
-          visibility: hidden;
-          pointer-events: none;
+          z-index: 4;
+          background: var(--dark);
+          transition: opacity 0.5s ease;
         }
 
-        .intro-shutter-blades {
-          width: 200px;
-          height: 200px;
-          position: relative;
-        }
+        .splash.phase4 .splash-captured { opacity: 1; }
 
-        .intro-blade {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          clip-path: polygon(50% 50%, 40% 0%, 60% 0%);
-          background: var(--dark3);
-          border: 1px solid rgba(184,134,11,0.2);
-          animation: shutterOpen 1.8s ease 0.8s forwards;
-        }
-
-        .intro-blade:nth-child(1) { transform: rotate(0deg); animation-delay: 0.8s; }
-        .intro-blade:nth-child(2) { transform: rotate(45deg); animation-delay: 0.85s; }
-        .intro-blade:nth-child(3) { transform: rotate(90deg); animation-delay: 0.9s; }
-        .intro-blade:nth-child(4) { transform: rotate(135deg); animation-delay: 0.95s; }
-        .intro-blade:nth-child(5) { transform: rotate(180deg); animation-delay: 1.0s; }
-        .intro-blade:nth-child(6) { transform: rotate(225deg); animation-delay: 1.05s; }
-        .intro-blade:nth-child(7) { transform: rotate(270deg); animation-delay: 1.1s; }
-        .intro-blade:nth-child(8) { transform: rotate(315deg); animation-delay: 1.15s; }
-
-        @keyframes shutterOpen {
-          0% { opacity: 1; }
-          100% { opacity: 0; transform: rotate(var(--r, 0deg)) scale(2); }
-        }
-
-        .intro-lens-ring {
-          position: absolute;
-          width: 180px;
-          height: 180px;
-          border: 2px solid var(--gold);
-          border-radius: 50%;
-          animation: lensRingPulse 2s ease infinite;
-        }
-
-        @keyframes lensRingPulse {
-          0%, 100% { transform: scale(1); opacity: 0.5; }
-          50% { transform: scale(1.1); opacity: 1; }
-        }
-
-        .intro-logo {
-          margin-top: 40px;
+        .splash-logo-text {
           font-family: 'Playfair Display', serif;
-          font-size: 28px;
+          font-size: 32px;
           color: var(--gold);
           letter-spacing: 8px;
           text-transform: uppercase;
-          opacity: 0;
-          animation: fadeUp 1s ease 0.3s forwards;
+        }
+
+        .splash-tagline {
+          font-family: 'Outfit', sans-serif;
+          font-size: 11px;
+          letter-spacing: 5px;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.4);
+          margin-top: 12px;
         }
 
         /* ===== FLASH EFFECT ===== */
@@ -507,7 +624,7 @@ export default function ShagunStudio() {
         }
 
         .hero-logo-img {
-          width: clamp(350px, 50vw, 500px);
+          width: clamp(500px, 65vw, 500px);
           height: auto;
           object-fit: contain;
           opacity: 0;
@@ -1167,12 +1284,32 @@ export default function ShagunStudio() {
       `}</style>
 
       {/* INTRO SHUTTER ANIMATION */}
-      <div className={`intro-shutter ${introComplete ? 'done' : ''}`}>
-        <div className="intro-shutter-blades">
-          <div className="intro-lens-ring" />
-          {[...Array(8)].map((_, i) => <div key={i} className="intro-blade" style={{ transform: `rotate(${i * 45}deg)`, '--r': `${i * 45}deg` }} />)}
+      <div className={`splash ${introComplete ? 'done' : ''} ${splashPhase >= 1 ? 'phase1' : ''} ${splashPhase >= 2 ? 'phase2' : ''} ${splashPhase >= 3 ? 'phase3' : ''} ${splashPhase >= 4 ? 'phase4' : ''}`}>
+        <div className="splash-grid" />
+        <div className="splash-hud-top">
+          <div className="splash-rec">REC</div>
+          <div>AF-S 85mm</div>
         </div>
-        <div className="intro-logo">Shagun Studio</div>
+        <div className="splash-focus">
+          <div className="splash-bracket tl" />
+          <div className="splash-bracket tr" />
+          <div className="splash-bracket bl" />
+          <div className="splash-bracket br" />
+          <div className="splash-cross" />
+          <div className="splash-dot" />
+        </div>
+        <div className="splash-hud-bottom">
+          <div><span>f</span>/1.4</div>
+          <div><span>ISO</span> 200</div>
+          <div><span>1</span>/1000s</div>
+        </div>
+        <div className="splash-shutter-top" />
+        <div className="splash-shutter-bottom" />
+        <div className="splash-flash" />
+        <div className="splash-captured">
+          <div className="splash-logo-text">Shagun Studio</div>
+          <div className="splash-tagline">Wedding Photography</div>
+        </div>
       </div>
 
       {/* FLASH */}
@@ -1189,7 +1326,10 @@ export default function ShagunStudio() {
       <div className="app">
         {/* NAV */}
         <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-          
+          <div className="nav-brand">
+            <div className="nav-camera-icon"><CameraIcon size={22} color="var(--gold)" /></div>
+            <div className="nav-logo">Shagun <span>Studio</span></div>
+          </div>
           <ul className="nav-links">
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#about">About</a></li>
