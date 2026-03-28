@@ -369,7 +369,7 @@ export default function ShagunStudio() {
         /* ===== HERO ===== */
         .hero {
           position: relative;
-          height: 100vh;
+          height: 60vh;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -392,14 +392,16 @@ export default function ShagunStudio() {
         .hero-vignette {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse at center, transparent 30%, rgba(13,13,13,0.8) 100%);
+          background: 
+            radial-gradient(ellipse at center, transparent 30%, rgba(13,13,13,0.8) 100%),
+            linear-gradient(to bottom, transparent 60%, rgba(13,13,13,0.95) 100%);
         }
 
         /* Lens ring overlay on hero */
         .hero-lens {
           position: absolute;
-          width: min(500px, 80vw);
-          height: min(500px, 80vw);
+          width: min(320px, 60vw);
+          height: min(320px, 60vw);
           border: 1px solid rgba(184,134,11,0.15);
           border-radius: 50%;
           animation: lensRotate 30s linear infinite;
@@ -408,7 +410,7 @@ export default function ShagunStudio() {
         .hero-lens::before {
           content: '';
           position: absolute;
-          inset: 20px;
+          inset: 14px;
           border: 1px solid rgba(184,134,11,0.1);
           border-radius: 50%;
         }
@@ -416,7 +418,7 @@ export default function ShagunStudio() {
         .hero-lens::after {
           content: '';
           position: absolute;
-          inset: 50px;
+          inset: 34px;
           border: 1px dashed rgba(184,134,11,0.08);
           border-radius: 50%;
         }
@@ -429,8 +431,8 @@ export default function ShagunStudio() {
         /* Focus brackets */
         .focus-bracket {
           position: absolute;
-          width: 40px;
-          height: 40px;
+          width: 28px;
+          height: 28px;
           border-color: var(--gold);
           border-style: solid;
           border-width: 0;
@@ -438,10 +440,10 @@ export default function ShagunStudio() {
           animation: focusIn 0.8s ease 1.8s forwards;
         }
 
-        .focus-bracket.tl { top: 30%; left: 30%; border-top-width: 2px; border-left-width: 2px; }
-        .focus-bracket.tr { top: 30%; right: 30%; border-top-width: 2px; border-right-width: 2px; }
-        .focus-bracket.bl { bottom: 30%; left: 30%; border-bottom-width: 2px; border-left-width: 2px; }
-        .focus-bracket.br { bottom: 30%; right: 30%; border-bottom-width: 2px; border-right-width: 2px; }
+        .focus-bracket.tl { top: 20%; left: 28%; border-top-width: 2px; border-left-width: 2px; }
+        .focus-bracket.tr { top: 20%; right: 28%; border-top-width: 2px; border-right-width: 2px; }
+        .focus-bracket.bl { bottom: 20%; left: 28%; border-bottom-width: 2px; border-left-width: 2px; }
+        .focus-bracket.br { bottom: 20%; right: 28%; border-bottom-width: 2px; border-right-width: 2px; }
 
         @keyframes focusIn {
           0% { opacity: 0; transform: scale(1.5); }
@@ -505,13 +507,13 @@ export default function ShagunStudio() {
         }
 
         .hero-logo-img {
-          width: clamp(320px, 55vw, 650px);
+          width: clamp(200px, 35vw, 380px);
           height: auto;
           object-fit: contain;
           opacity: 0;
           animation: logoReveal 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
           filter: drop-shadow(0 0 40px rgba(184, 134, 11, 0.15));
-          margin: 20px 0 30px;
+          margin: 8px 0 10px;
                   }
 
         @keyframes logoReveal {
@@ -537,7 +539,7 @@ export default function ShagunStudio() {
         }
 
         .hero-shutter-btn {
-          margin-top: 48px;
+          margin-top: 16px;
           opacity: 0;
           animation: fadeUp 1s ease 1.6s forwards;
           cursor: pointer;
@@ -548,6 +550,8 @@ export default function ShagunStudio() {
 
         .hero-shutter-btn .shutter-svg {
           transition: transform 0.3s ease;
+          width: 44px;
+          height: 44px;
         }
 
         .hero-shutter-btn:hover .shutter-svg {
@@ -564,13 +568,13 @@ export default function ShagunStudio() {
           letter-spacing: 4px;
           text-transform: uppercase;
           color: var(--gold);
-          margin-top: 12px;
+          margin-top: 6px;
         }
 
         /* Camera info overlay */
         .cam-info {
           position: absolute;
-          bottom: 40px;
+          bottom: 16px;
           left: 48px;
           display: flex;
           gap: 24px;
@@ -594,25 +598,49 @@ export default function ShagunStudio() {
         }
 
         /* ===== GALLERY SECTION ===== */
+        /* Transition zone between hero and gallery */
+        .hero-gallery-transition {
+          position: relative;
+          height: 80px;
+          background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 30%, #3A3028 60%, var(--cream) 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-gallery-transition::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 60px;
+          height: 1px;
+          background: var(--gold);
+          opacity: 0.6;
+        }
+
+        .hero-gallery-transition::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 8px;
+          height: 8px;
+          border: 1px solid var(--gold);
+          border-radius: 50%;
+          background: var(--dark2);
+        }
+
         .gallery-section {
           background: var(--cream);
           position: relative;
         }
 
-        .gallery-section::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 120px;
-          background: linear-gradient(180deg, var(--dark) 0%, transparent 100%);
-          z-index: 1;
-        }
-
         .section-head {
           text-align: center;
-          padding: 120px 20px 50px;
+          padding: 60px 20px 50px;
           position: relative;
           z-index: 2;
         }
@@ -1202,6 +1230,9 @@ export default function ShagunStudio() {
             <div className="cam-info-item"><span>85</span>mm</div>
           </div>
         </section>
+
+        {/* TRANSITION */}
+        <div className="hero-gallery-transition" />
 
         {/* GALLERY */}
         <div className="gallery-section" id="portfolio">
