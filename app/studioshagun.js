@@ -488,22 +488,24 @@ export default function ShagunStudio() {
         /* ===== HERO ===== */
         .hero {
           position: relative;
-          height: clamp(300px, 42vh, 430px);
-          padding: calc(var(--nav-height-desktop) + 4px) 0 18px;
+          height: clamp(340px, 48vh, 500px);
+          padding: calc(var(--nav-height-desktop) + 16px) 0 32px;
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
+          border-bottom: 1px solid rgba(184,134,11,0.1);
         }
 
         .hero-bg {
           position: absolute;
           inset: 0;
           background:
-            radial-gradient(circle at center, rgba(212,168,67,0.12) 0%, rgba(212,168,67,0.05) 22%, rgba(255,255,255,0) 48%),
-            linear-gradient(180deg, #fffdf9 0%, #f8f3ea 58%, #f3ede3 100%);
-          filter: none;
+            linear-gradient(180deg, rgba(255,253,249,0.72) 0%, rgba(250,245,236,0.6) 48%, rgba(244,237,226,0.72) 100%),
+            url('/images/hero-bride.jpg') center 28% / cover no-repeat;
+          filter: blur(3px) brightness(1.08) saturate(0.88);
           animation: heroSlow 25s ease-in-out infinite alternate;
+          transform: scale(1.05);
         }
 
         @keyframes heroSlow {
@@ -515,16 +517,16 @@ export default function ShagunStudio() {
           position: absolute;
           inset: 0;
           background: 
-            radial-gradient(ellipse at center, rgba(255,255,255,0) 28%, rgba(188,168,138,0.08) 100%),
-            linear-gradient(to bottom, rgba(255,255,255,0.78) 0%, rgba(245,240,232,0.16) 40%, rgba(226,209,191,0.36) 100%);
+            radial-gradient(ellipse at center, rgba(255,255,255,0.08) 20%, rgba(188,168,138,0.1) 100%),
+            linear-gradient(to bottom, rgba(255,255,255,0.78) 0%, rgba(245,240,232,0.14) 34%, rgba(226,209,191,0.46) 100%);
         }
 
         /* Lens ring overlay on hero */
         .hero-lens {
           position: absolute;
-          width: min(250px, 48vw);
-          height: min(250px, 48vw);
-          border: 1px solid rgba(184,134,11,0.2);
+          width: min(300px, 54vw);
+          height: min(300px, 54vw);
+          border: 1px solid rgba(184,134,11,0.24);
           border-radius: 50%;
           animation: lensRotate 30s linear infinite;
         }
@@ -610,6 +612,8 @@ export default function ShagunStudio() {
           display: flex;
           flex-direction: column;
           align-items: center;
+          justify-content: center;
+          gap: 6px;
         }
 
         .hero-cam-icon {
@@ -629,13 +633,13 @@ export default function ShagunStudio() {
         }
 
         .hero-logo-img {
-          width: clamp(250px, 32vw, 320px);
+          width: clamp(290px, 36vw, 380px);
           height: auto;
           object-fit: contain;
           opacity: 0;
           animation: logoReveal 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
           filter: brightness(0.08) saturate(0) drop-shadow(0 0 24px rgba(184, 134, 11, 0.08));
-          margin: 0 0 4px;
+          margin: 0 0 6px;
         }
 
         @keyframes logoReveal {
@@ -661,7 +665,7 @@ export default function ShagunStudio() {
         }
 
         .hero-shutter-btn {
-          margin-top: 2px;
+          margin-top: 6px;
           opacity: 0;
           animation: fadeUp 1s ease 1.6s forwards;
           cursor: pointer;
@@ -672,8 +676,8 @@ export default function ShagunStudio() {
 
         .hero-shutter-btn .shutter-svg {
           transition: transform 0.3s ease;
-          width: 34px;
-          height: 34px;
+          width: 38px;
+          height: 38px;
         }
 
         .hero-shutter-btn:hover .shutter-svg {
@@ -686,17 +690,17 @@ export default function ShagunStudio() {
 
         .shutter-text {
           font-family: 'Outfit', sans-serif;
-          font-size: 8px;
-          letter-spacing: 2.5px;
+          font-size: 9px;
+          letter-spacing: 3px;
           text-transform: uppercase;
           color: var(--gold);
-          margin-top: 2px;
+          margin-top: 4px;
         }
 
         /* Camera info overlay */
         .cam-info {
           position: absolute;
-          bottom: 10px;
+          bottom: 18px;
           left: 48px;
           display: flex;
           gap: 24px;
@@ -723,8 +727,8 @@ export default function ShagunStudio() {
         /* Transition zone between hero and gallery */
         .hero-gallery-transition {
           position: relative;
-          height: 30px;
-          background: linear-gradient(180deg, #f3ede3 0%, #f4eee5 36%, #f5f0e8 100%);
+          height: 46px;
+          background: linear-gradient(180deg, #efe7da 0%, #f3ece2 48%, #f5f0e8 100%);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1280,25 +1284,25 @@ export default function ShagunStudio() {
           .nav-links { display: none; }
           .nav { padding: 16px 20px; }
           .hero {
-            height: clamp(240px, 34vh, 300px);
-            padding: calc(var(--nav-height-mobile) + 2px) 0 14px;
+            height: clamp(280px, 40vh, 360px);
+            padding: calc(var(--nav-height-mobile) + 12px) 0 18px;
           }
           .hero-lens {
-            width: min(190px, 52vw);
-            height: min(190px, 52vw);
+            width: min(220px, 60vw);
+            height: min(220px, 60vw);
           }
-          .hero-logo-img { width: clamp(180px, 42vw, 240px); }
-          .hero-shutter-btn { margin-top: 0; }
+          .hero-logo-img { width: clamp(220px, 52vw, 280px); }
+          .hero-shutter-btn { margin-top: 4px; }
           .hero-shutter-btn .shutter-svg {
-            width: 30px;
-            height: 30px;
+            width: 34px;
+            height: 34px;
           }
           .shutter-text {
-            font-size: 7px;
-            letter-spacing: 2px;
-            margin-top: 2px;
+            font-size: 8px;
+            letter-spacing: 2.4px;
+            margin-top: 3px;
           }
-          .hero-gallery-transition { height: 22px; }
+          .hero-gallery-transition { height: 30px; }
           .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
           .about-section { padding: 60px 24px; gap: 40px; }
           .about-img { width: 100%; height: 320px; }
