@@ -408,6 +408,9 @@ export default function ShagunStudio() {
           left: 0;
           right: 0;
           z-index: 500;
+          background: rgba(13,13,13,0.98);
+          backdrop-filter: blur(24px);
+          border-bottom: 1px solid rgba(184,134,11,0.15);
           padding: 24px 48px;
           display: flex;
           justify-content: space-between;
@@ -416,10 +419,7 @@ export default function ShagunStudio() {
         }
 
         .nav.scrolled {
-          background: rgba(13,13,13,0.95);
-          backdrop-filter: blur(24px);
           padding: 16px 48px;
-          border-bottom: 1px solid rgba(184,134,11,0.15);
         }
 
         .nav-brand {
