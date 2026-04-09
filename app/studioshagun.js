@@ -501,11 +501,11 @@ export default function ShagunStudio() {
           position: absolute;
           inset: 0;
           background:
-            linear-gradient(180deg, rgba(255,253,249,0.72) 0%, rgba(250,245,236,0.6) 48%, rgba(244,237,226,0.72) 100%),
-            url('/images/hero-bride.jpg') center 28% / cover no-repeat;
-          filter: blur(3px) brightness(1.08) saturate(0.88);
+            linear-gradient(180deg, rgba(255,253,249,0.28) 0%, rgba(250,245,236,0.18) 48%, rgba(244,237,226,0.3) 100%),
+            url('/images/hero-bride.jpg') center 24% / cover no-repeat;
+          filter: blur(1.5px) brightness(0.95) saturate(1);
           animation: heroSlow 25s ease-in-out infinite alternate;
-          transform: scale(1.05);
+          transform: scale(1.03);
         }
 
         @keyframes heroSlow {
@@ -517,8 +517,8 @@ export default function ShagunStudio() {
           position: absolute;
           inset: 0;
           background: 
-            radial-gradient(ellipse at center, rgba(255,255,255,0.08) 20%, rgba(188,168,138,0.1) 100%),
-            linear-gradient(to bottom, rgba(255,255,255,0.78) 0%, rgba(245,240,232,0.14) 34%, rgba(226,209,191,0.46) 100%);
+            radial-gradient(ellipse at center, rgba(255,255,255,0.02) 18%, rgba(188,168,138,0.06) 100%),
+            linear-gradient(to bottom, rgba(255,255,255,0.18) 0%, rgba(245,240,232,0.06) 34%, rgba(226,209,191,0.24) 100%);
         }
 
         /* Lens ring overlay on hero */
