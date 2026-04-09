@@ -501,9 +501,9 @@ export default function ShagunStudio() {
           position: absolute;
           inset: 0;
           background:
-            linear-gradient(180deg, rgba(255,253,249,0.28) 0%, rgba(250,245,236,0.18) 48%, rgba(244,237,226,0.3) 100%),
+            linear-gradient(180deg, rgba(255,253,249,0.16) 0%, rgba(250,245,236,0.1) 48%, rgba(244,237,226,0.18) 100%),
             url('/images/hero-bride.jpg') center 24% / cover no-repeat;
-          filter: blur(1.5px) brightness(0.95) saturate(1);
+          filter: brightness(0.98) saturate(1.02);
           animation: heroSlow 25s ease-in-out infinite alternate;
           transform: scale(1.03);
         }
