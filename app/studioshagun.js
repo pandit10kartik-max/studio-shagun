@@ -499,8 +499,10 @@ export default function ShagunStudio() {
         .hero-bg {
           position: absolute;
           inset: 0;
-          background: url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1600&q=80') center/cover;
-          filter: brightness(0.25) saturate(0.8);
+          background:
+            radial-gradient(circle at center, rgba(212,168,67,0.12) 0%, rgba(212,168,67,0.05) 22%, rgba(255,255,255,0) 48%),
+            linear-gradient(180deg, #fffdf9 0%, #f8f3ea 58%, #f3ede3 100%);
+          filter: none;
           animation: heroSlow 25s ease-in-out infinite alternate;
         }
 
@@ -513,8 +515,8 @@ export default function ShagunStudio() {
           position: absolute;
           inset: 0;
           background: 
-            radial-gradient(ellipse at center, transparent 30%, rgba(13,13,13,0.8) 100%),
-            linear-gradient(to bottom, transparent 60%, rgba(13,13,13,0.95) 100%);
+            radial-gradient(ellipse at center, rgba(255,255,255,0) 28%, rgba(188,168,138,0.08) 100%),
+            linear-gradient(to bottom, rgba(255,255,255,0.78) 0%, rgba(245,240,232,0.16) 40%, rgba(226,209,191,0.36) 100%);
         }
 
         /* Lens ring overlay on hero */
@@ -522,7 +524,7 @@ export default function ShagunStudio() {
           position: absolute;
           width: min(250px, 48vw);
           height: min(250px, 48vw);
-          border: 1px solid rgba(184,134,11,0.15);
+          border: 1px solid rgba(184,134,11,0.2);
           border-radius: 50%;
           animation: lensRotate 30s linear infinite;
         }
@@ -531,7 +533,7 @@ export default function ShagunStudio() {
           content: '';
           position: absolute;
           inset: 14px;
-          border: 1px solid rgba(184,134,11,0.1);
+          border: 1px solid rgba(184,134,11,0.16);
           border-radius: 50%;
         }
 
@@ -539,7 +541,7 @@ export default function ShagunStudio() {
           content: '';
           position: absolute;
           inset: 34px;
-          border: 1px dashed rgba(184,134,11,0.08);
+          border: 1px dashed rgba(184,134,11,0.12);
           border-radius: 50%;
         }
 
@@ -553,7 +555,7 @@ export default function ShagunStudio() {
           position: absolute;
           width: 28px;
           height: 28px;
-          border-color: var(--gold);
+          border-color: rgba(184,134,11,0.8);
           border-style: solid;
           border-width: 0;
           opacity: 0;
@@ -632,7 +634,7 @@ export default function ShagunStudio() {
           object-fit: contain;
           opacity: 0;
           animation: logoReveal 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
-          filter: drop-shadow(0 0 40px rgba(184, 134, 11, 0.15));
+          filter: brightness(0.08) saturate(0) drop-shadow(0 0 24px rgba(184, 134, 11, 0.08));
           margin: 0 0 4px;
         }
 
@@ -640,21 +642,21 @@ export default function ShagunStudio() {
           0% { 
             opacity: 0; 
             transform: scale(0.7) rotate(-3deg); 
-            filter: drop-shadow(0 0 0px rgba(184, 134, 11, 0)) brightness(0.3);
+            filter: brightness(0.3) saturate(0) drop-shadow(0 0 0px rgba(184, 134, 11, 0));
           }
           40% { 
             opacity: 1; 
             transform: scale(1.03) rotate(0deg);
-            filter: drop-shadow(0 0 60px rgba(184, 134, 11, 0.4)) brightness(1.2);
+            filter: brightness(0.12) saturate(0) drop-shadow(0 0 42px rgba(184, 134, 11, 0.24));
           }
           70% {
             transform: scale(0.98);
-            filter: drop-shadow(0 0 30px rgba(184, 134, 11, 0.2)) brightness(1);
+            filter: brightness(0.09) saturate(0) drop-shadow(0 0 18px rgba(184, 134, 11, 0.12));
           }
           100% { 
             opacity: 1; 
             transform: scale(1) rotate(0deg); 
-            filter: drop-shadow(0 0 40px rgba(184, 134, 11, 0.15)) brightness(1);
+            filter: brightness(0.08) saturate(0) drop-shadow(0 0 24px rgba(184, 134, 11, 0.08));
           }
         }
 
@@ -705,7 +707,7 @@ export default function ShagunStudio() {
         .cam-info-item {
           font-size: 10px;
           letter-spacing: 2px;
-          color: rgba(255,255,255,0.3);
+          color: rgba(13,13,13,0.45);
           font-weight: 200;
           font-variant-numeric: tabular-nums;
         }
@@ -722,7 +724,7 @@ export default function ShagunStudio() {
         .hero-gallery-transition {
           position: relative;
           height: 30px;
-          background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 30%, #3A3028 60%, var(--cream) 100%);
+          background: linear-gradient(180deg, #f3ede3 0%, #f4eee5 36%, #f5f0e8 100%);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -750,7 +752,7 @@ export default function ShagunStudio() {
           height: 8px;
           border: 1px solid var(--gold);
           border-radius: 50%;
-          background: var(--dark2);
+          background: var(--cream);
         }
 
         .gallery-section {
