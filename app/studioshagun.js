@@ -154,6 +154,8 @@ export default function ShagunStudio() {
           --blush: #E2D1BF;
           --white: #FEFEFE;
           --red-focus: #C0392B;
+          --nav-height-desktop: 88px;
+          --nav-height-mobile: 64px;
         }
 
         /* ===== CAMERA SPLASH ===== */
@@ -486,7 +488,8 @@ export default function ShagunStudio() {
         /* ===== HERO ===== */
         .hero {
           position: relative;
-          height: 60vh;
+          height: clamp(360px, 52vh, 520px);
+          padding: calc(var(--nav-height-desktop) + 12px) 0 36px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -624,14 +627,14 @@ export default function ShagunStudio() {
         }
 
         .hero-logo-img {
-          width: clamp(500px, 65vw, 500px);
+          width: clamp(360px, 52vw, 460px);
           height: auto;
           object-fit: contain;
           opacity: 0;
           animation: logoReveal 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
           filter: drop-shadow(0 0 40px rgba(184, 134, 11, 0.15));
-          margin: 8px 0 10px;
-                  }
+          margin: 0 0 8px;
+        }
 
         @keyframes logoReveal {
           0% { 
@@ -656,7 +659,7 @@ export default function ShagunStudio() {
         }
 
         .hero-shutter-btn {
-          margin-top: 16px;
+          margin-top: 8px;
           opacity: 0;
           animation: fadeUp 1s ease 1.6s forwards;
           cursor: pointer;
@@ -667,8 +670,8 @@ export default function ShagunStudio() {
 
         .hero-shutter-btn .shutter-svg {
           transition: transform 0.3s ease;
-          width: 44px;
-          height: 44px;
+          width: 40px;
+          height: 40px;
         }
 
         .hero-shutter-btn:hover .shutter-svg {
@@ -682,10 +685,10 @@ export default function ShagunStudio() {
         .shutter-text {
           font-family: 'Outfit', sans-serif;
           font-size: 9px;
-          letter-spacing: 4px;
+          letter-spacing: 3px;
           text-transform: uppercase;
           color: var(--gold);
-          margin-top: 6px;
+          margin-top: 4px;
         }
 
         /* Camera info overlay */
@@ -718,7 +721,7 @@ export default function ShagunStudio() {
         /* Transition zone between hero and gallery */
         .hero-gallery-transition {
           position: relative;
-          height: 80px;
+          height: 52px;
           background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 30%, #3A3028 60%, var(--cream) 100%);
           display: flex;
           align-items: center;
@@ -1274,6 +1277,18 @@ export default function ShagunStudio() {
         @media (max-width: 768px) {
           .nav-links { display: none; }
           .nav { padding: 16px 20px; }
+          .hero {
+            height: clamp(300px, 46vh, 380px);
+            padding: calc(var(--nav-height-mobile) + 12px) 0 24px;
+          }
+          .hero-logo-img { width: clamp(260px, 72vw, 340px); }
+          .hero-shutter-btn { margin-top: 6px; }
+          .hero-shutter-btn .shutter-svg {
+            width: 36px;
+            height: 36px;
+          }
+          .shutter-text { letter-spacing: 2.5px; }
+          .hero-gallery-transition { height: 38px; }
           .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
           .about-section { padding: 60px 24px; gap: 40px; }
           .about-img { width: 100%; height: 320px; }
