@@ -1425,7 +1425,7 @@ export default function ShagunStudio() {
 }
 
 .hero-bg-2 {
-  background-position: 40% top;
+  background-position:60% center;
 }
           .hero-lens {
             width: min(220px, 60vw);
