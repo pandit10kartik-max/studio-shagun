@@ -498,12 +498,12 @@ export default function ShagunStudio() {
         }
 
      .hero-bg {
-        position: absolute;
-           inset: 0;
-           background: url('/images/hero-bride.jpg') center/cover no-repeat;
-             transform: scale(1.03);
-                  animation: heroSlow 25s ease-in-out infinite alternate;
-             }
+  position: absolute;
+  inset: 0;
+  background: url(/images/hero-bride.jpg) center/cover no-repeat;
+  transform: scale(1.03);
+  animation: heroSlow 25s ease-in-out infinite alternate;
+}
         @keyframes heroSlow {
           0% { transform: scale(1.05) translateX(0); }
           100% { transform: scale(1.15) translateX(-2%); }
