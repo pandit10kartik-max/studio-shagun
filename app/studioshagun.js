@@ -756,35 +756,62 @@ export default function ShagunStudio() {
           opacity: 0.6;
         }
 
-        .hero-logo-img {
-          width: clamp(260px, 46vw, 660px);
-          height: auto;
-          object-fit: contain;
-          opacity: 0;
-          animation: logoReveal 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
-          filter: brightness(0.08) saturate(0) drop-shadow(0 0 24px rgba(184, 134, 11, 0.08));
-          margin: 0 0 6px;
+        /* Hero typographic title */
+        .hero-title-wrap {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0;
+          margin-bottom: 8px;
         }
 
-        @keyframes logoReveal {
-          0% { 
-            opacity: 0; 
-            transform: scale(0.7) rotate(-3deg); 
-            filter: brightness(0.3) saturate(0) drop-shadow(0 0 0px rgba(184, 134, 11, 0));
+        .hero-title {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(52px, 9vw, 112px);
+          font-weight: 400;
+          color: var(--white);
+          letter-spacing: clamp(10px, 1.6vw, 22px);
+          text-transform: uppercase;
+          line-height: 1;
+          opacity: 0;
+          animation: heroTitleIn 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+          text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+        }
+
+        .hero-title-studio {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(18px, 3vw, 38px);
+          font-weight: 400;
+          font-style: italic;
+          color: var(--gold);
+          letter-spacing: clamp(8px, 1.2vw, 16px);
+          opacity: 0;
+          animation: fadeUp 1s ease 1.1s forwards;
+          margin-top: 6px;
+        }
+
+        .hero-divider {
+          width: 60px;
+          height: 1px;
+          background: linear-gradient(to right, transparent, var(--gold), transparent);
+          margin: 20px auto;
+          opacity: 0;
+          animation: fadeUp 1s ease 1.25s forwards;
+        }
+
+        @keyframes heroTitleIn {
+          0% {
+            opacity: 0;
+            transform: translateY(24px);
+            letter-spacing: clamp(2px, 0.3vw, 4px);
           }
-          40% { 
-            opacity: 1; 
-            transform: scale(1.03) rotate(0deg);
-            filter: brightness(0.12) saturate(0) drop-shadow(0 0 42px rgba(184, 134, 11, 0.24));
+          60% {
+            opacity: 1;
           }
-          70% {
-            transform: scale(0.98);
-            filter: brightness(0.09) saturate(0) drop-shadow(0 0 18px rgba(184, 134, 11, 0.12));
-          }
-          100% { 
-            opacity: 1; 
-            transform: scale(1) rotate(0deg); 
-            filter: brightness(0.08) saturate(0) drop-shadow(0 0 24px rgba(184, 134, 11, 0.08));
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+            letter-spacing: clamp(10px, 1.6vw, 22px);
           }
         }
 
@@ -824,14 +851,14 @@ export default function ShagunStudio() {
         /* Hero subtitle */
         .hero-subtitle {
           font-family: 'Outfit', sans-serif;
-          font-size: 13px;
+          font-size: 12px;
           font-weight: 200;
           letter-spacing: 5px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.55);
+          color: rgba(255,255,255,0.5);
           opacity: 0;
-          animation: fadeUp 1s ease 1.3s forwards;
-          margin: 18px 0 40px;
+          animation: fadeUp 1s ease 1.45s forwards;
+          margin: 0 0 40px;
         }
 
         /* Hero CTA group */
@@ -840,7 +867,7 @@ export default function ShagunStudio() {
           align-items: center;
           gap: 16px;
           opacity: 0;
-          animation: fadeUp 1s ease 1.6s forwards;
+          animation: fadeUp 1s ease 1.7s forwards;
           flex-wrap: wrap;
           justify-content: center;
         }
@@ -1550,7 +1577,9 @@ export default function ShagunStudio() {
             letter-spacing: 5px;
           }
 
-          .hero-logo-img { width: clamp(200px, 74vw, 320px); }
+          .hero-title { letter-spacing: 8px; }
+          .hero-title-studio { letter-spacing: 6px; }
+          .hero-divider { margin: 14px auto; }
 
           .hero-subtitle {
             font-size: 10px;
@@ -1659,11 +1688,11 @@ export default function ShagunStudio() {
 
           <div className="hero-content">
             <div className="hero-eyebrow">Wedding Photography</div>
-            <img
-              className="hero-logo-img"
-              src="/images/logo_1.jpeg"
-              alt="Shagun Studio"
-            />
+            <div className="hero-title-wrap">
+              <h1 className="hero-title">Shagun</h1>
+              <span className="hero-title-studio">Studio</span>
+            </div>
+            <div className="hero-divider" />
             <p className="hero-subtitle">Capturing timeless love stories</p>
             <div className="hero-cta-group">
               <button className="hero-cta-primary" onClick={() => {
