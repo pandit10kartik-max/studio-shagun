@@ -709,7 +709,7 @@ export default function ShagunStudio() {
         }
 
         .hero-logo-img {
-          width: clamp(290px, 36vw, 380px);
+   width: clamp(900px, 55vw, 600px);
           height: auto;
           object-fit: contain;
           opacity: 0;
