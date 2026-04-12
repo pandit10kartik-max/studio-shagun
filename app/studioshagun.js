@@ -518,7 +518,7 @@ export default function ShagunStudio() {
 
 .ham-line {
   display: block;
-  width: 28px;
+  width: 24px;
   height: 1.5px;
   background: var(--gold);
   transition: all 0.3s ease;
@@ -531,7 +531,10 @@ export default function ShagunStudio() {
 
 /* Mobile */
 @media (max-width: 768px) {
-  .nav { padding: 16px 20px; }
+.nav {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+}
   
   .nav-hamburger { display: flex; }
   
@@ -578,10 +581,10 @@ export default function ShagunStudio() {
           border-bottom: 1px solid rgba(184,134,11,0.1);
         }
 
-     .hero-bg {
+  .hero-bg {
   position: absolute;
   inset: 0;
-  background: url(/images/hero-bride.jpg) center/cover no-repeat;
+  background: url(/images/hero-bride.jpg) center center / cover no-repeat;
   transform: scale(1.03);
   animation: heroSlow 25s ease-in-out infinite alternate;
 }
