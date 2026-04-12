@@ -584,14 +584,30 @@ export default function ShagunStudio() {
   .hero-bg {
   position: absolute;
   inset: 0;
-  background: url(/images/hero-bride.jpg) center center / cover no-repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   transform: scale(1.03);
   animation: heroSlow 25s ease-in-out infinite alternate;
 }
-        @keyframes heroSlow {
-          0% { transform: scale(1.05) translateX(0); }
-          100% { transform: scale(1.15) translateX(-2%); }
-        }
+
+.hero-bg-1 {
+  background-image: url(/images/hero-bride.jpg);
+  animation: fadeSlide 10s ease-in-out infinite;
+}
+
+.hero-bg-2 {
+  background-image: url(/images/hero-bride-2.jpg);
+  animation: fadeSlide 10s ease-in-out 5s infinite;
+}
+
+@keyframes fadeSlide {
+  0%   { opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { opacity: 1; }
+  60%  { opacity: 0; }
+  100% { opacity: 0; }
+}
 
        .hero-vignette {
   display: none;
@@ -1481,7 +1497,8 @@ export default function ShagunStudio() {
 
         {/* HERO */}
         <section className="hero">
-          <div className="hero-bg" />
+          <div className="hero-bg hero-bg-1" />
+<div className="hero-bg hero-bg-2" />
           <div className="hero-vignette" />
           <div className="hero-lens" />
           <div className="focus-bracket tl" />
