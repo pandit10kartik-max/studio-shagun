@@ -122,6 +122,7 @@ const ShutterIcon = () => (
 export default function ShagunStudio() {
   const [filter, setFilter] = useState("All");
   const [pricingTab, setPricingTab] = useState("Single Day");
+  const [bookForm, setBookForm] = useState({ name: '', phone: '', date: '', package: '', message: '' });
   const [lightbox, setLightbox] = useState({ open: false, index: 0 });
   const [scrolled, setScrolled] = useState(false);
   const [flash, setFlash] = useState(false);
@@ -1928,6 +1929,222 @@ export default function ShagunStudio() {
           color: var(--dark);
         }
 
+        /* ===== WHATSAPP FLOAT ===== */
+        .wa-float {
+          position: fixed;
+          bottom: 28px;
+          right: 28px;
+          z-index: 4000;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 10px;
+        }
+
+        .wa-btn {
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          background: #25D366;
+          border: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          text-decoration: none;
+        }
+
+        .wa-btn:hover {
+          transform: scale(1.1);
+          box-shadow: 0 6px 28px rgba(37,211,102,0.6);
+        }
+
+        .wa-tooltip {
+          background: var(--dark);
+          color: var(--white);
+          font-size: 10px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          padding: 7px 14px;
+          white-space: nowrap;
+          opacity: 0;
+          transform: translateX(8px);
+          transition: all 0.3s ease;
+          pointer-events: none;
+          border: 1px solid rgba(37,211,102,0.2);
+        }
+
+        .wa-float:hover .wa-tooltip {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        /* ===== CONTACT / BOOKING ===== */
+        .contact-section {
+          background: var(--dark);
+          padding: 100px 24px 110px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .contact-section::before {
+          content: '';
+          position: absolute;
+          width: 500px;
+          height: 500px;
+          border: 1px solid rgba(184,134,11,0.05);
+          border-radius: 50%;
+          left: -200px;
+          bottom: -200px;
+        }
+
+        .contact-inner {
+          max-width: 780px;
+          margin: 0 auto;
+        }
+
+        .contact-intro {
+          text-align: center;
+          margin-bottom: 52px;
+        }
+
+        .contact-intro h2 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(28px, 4vw, 44px);
+          font-weight: 400;
+          color: var(--white);
+          margin: 16px 0 16px;
+          line-height: 1.3;
+        }
+
+        .contact-intro h2 em { font-style: italic; color: var(--gold); }
+
+        .contact-intro p {
+          font-size: 13px;
+          color: rgba(255,255,255,0.4);
+          letter-spacing: 1px;
+          font-weight: 200;
+        }
+
+        .booking-form {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
+
+        .booking-form .full { grid-column: 1 / -1; }
+
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .form-label {
+          font-size: 8px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: var(--gold);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          color: var(--white);
+          font-family: 'Outfit', sans-serif;
+          font-size: 13px;
+          font-weight: 300;
+          padding: 14px 16px;
+          outline: none;
+          transition: border-color 0.3s ease;
+          width: 100%;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+          border-color: rgba(184,134,11,0.5);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+
+        .form-select { cursor: pointer; appearance: none; }
+        .form-select option { background: var(--dark2); color: var(--white); }
+
+        /* Date input calendar icon colour fix */
+        .form-input[type="date"]::-webkit-calendar-picker-indicator {
+          filter: invert(0.6) sepia(1) saturate(3) hue-rotate(5deg);
+          cursor: pointer;
+        }
+
+        .form-textarea { resize: vertical; min-height: 110px; }
+
+        .form-actions {
+          display: flex;
+          gap: 14px;
+          flex-wrap: wrap;
+          margin-top: 4px;
+        }
+
+        .form-submit-wa {
+          flex: 1;
+          min-width: 200px;
+          padding: 16px 24px;
+          background: #25D366;
+          border: none;
+          color: #fff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 10px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          cursor: pointer;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          transition: all 0.35s ease;
+        }
+
+        .form-submit-wa:hover { background: #1ebe5d; transform: translateY(-2px); }
+
+        .form-submit-call {
+          flex: 1;
+          min-width: 160px;
+          padding: 16px 24px;
+          background: transparent;
+          border: 1px solid rgba(184,134,11,0.35);
+          color: var(--gold);
+          font-family: 'Outfit', sans-serif;
+          font-size: 10px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          cursor: pointer;
+          font-weight: 300;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          text-decoration: none;
+          transition: all 0.35s ease;
+        }
+
+        .form-submit-call:hover {
+          background: rgba(184,134,11,0.1);
+          border-color: var(--gold);
+        }
+
+        @media (max-width: 640px) {
+          .booking-form { grid-template-columns: 1fr; }
+          .booking-form .full { grid-column: 1; }
+          .contact-section { padding: 72px 16px 80px; }
+        }
+
         /* ===== FOOTER ===== */
         .foot {
           background: var(--dark);
@@ -2136,7 +2353,7 @@ export default function ShagunStudio() {
                 View Portfolio
               </button>
               <button className="hero-cta-secondary" onClick={() => {
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                window.open('https://wa.me/919816006300?text=Hi%20Shagun%20Studio!%20I%27d%20like%20to%20book%20a%20session.', '_blank');
               }}>
                 Book a Session
               </button>
@@ -2314,14 +2531,80 @@ export default function ShagunStudio() {
           <p className="pricing-note">60% advance payment required · 10% off on full advance payment</p>
         </section>
 
-        {/* CTA */}
-        <section className="cta-section" id="contact">
-          <div className="section-tag">Get in Touch</div>
-          <h2 className="cta-h2">Ready to have your love story <em>captured</em> in timeless frames?</h2>
-          <button className="cta-btn" onClick={triggerFlash}>
-            <CameraIcon size={16} /> Book a Session
-          </button>
+        {/* CONTACT / BOOKING */}
+        <section className="contact-section" id="contact">
+          <div className="contact-inner">
+            <div className="contact-intro">
+              <div className="section-tag" style={{justifyContent:'center'}}>Get in Touch</div>
+              <h2>Book your <em>wedding session</em> with us</h2>
+              <p>Fill in the details below and we'll reach out on WhatsApp within a few hours</p>
+            </div>
+
+            <form className="booking-form" onSubmit={e => {
+              e.preventDefault();
+              const msg = `Hi Shagun Studio! 🌸\n\nI'd like to book a session.\n\n👤 Name: ${bookForm.name}\n📞 Phone: ${bookForm.phone}\n💍 Wedding Date: ${bookForm.date || 'Not decided yet'}\n📦 Package: ${bookForm.package || 'To discuss'}\n\n💬 ${bookForm.message || 'Looking forward to hearing from you!'}`;
+              window.open(`https://wa.me/919816006300?text=${encodeURIComponent(msg)}`, '_blank');
+            }}>
+              <div className="form-group">
+                <label className="form-label">Your Name</label>
+                <input className="form-input" type="text" placeholder="e.g. Priya Sharma" required
+                  value={bookForm.name} onChange={e => setBookForm(p => ({...p, name: e.target.value}))} />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Phone Number</label>
+                <input className="form-input" type="tel" placeholder="e.g. 98765 43210" required
+                  value={bookForm.phone} onChange={e => setBookForm(p => ({...p, phone: e.target.value}))} />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Wedding Date</label>
+                <input className="form-input" type="date"
+                  value={bookForm.date} onChange={e => setBookForm(p => ({...p, date: e.target.value}))} />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Package Interest</label>
+                <select className="form-select"
+                  value={bookForm.package} onChange={e => setBookForm(p => ({...p, package: e.target.value}))}>
+                  <option value="">Select a package…</option>
+                  <option>Traditional Package — RS. 45,000</option>
+                  <option>Gold Package (Single Day) — RS. 85,000</option>
+                  <option>Silver Combo Package — RS. 80,000</option>
+                  <option>Gold Combo Package — RS. 1,40,000</option>
+                  <option>Engagement Shoot — RS. 35,000</option>
+                  <option>Pre-Wedding Shoot — RS. 45,000</option>
+                  <option>Custom / Not sure yet</option>
+                </select>
+              </div>
+
+              <div className="form-group full">
+                <label className="form-label">Message (optional)</label>
+                <textarea className="form-textarea" placeholder="Tell us a little about your wedding — venue, theme, or anything special…"
+                  value={bookForm.message} onChange={e => setBookForm(p => ({...p, message: e.target.value}))} />
+              </div>
+
+              <div className="form-actions full">
+                <button type="submit" className="form-submit-wa">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.849L.057 23.552a.5.5 0 0 0 .6.601l5.788-1.515A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.826 9.826 0 0 1-5.009-1.371l-.36-.214-3.733.977.999-3.645-.235-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
+                  Send via WhatsApp
+                </button>
+                <a className="form-submit-call" href="tel:+919816006300">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.89a16 16 0 0 0 6.29 6.29l1.67-1.83a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  Call Now
+                </a>
+              </div>
+            </form>
+          </div>
         </section>
+
+        {/* FLOATING WHATSAPP */}
+        <div className="wa-float">
+          <div className="wa-tooltip">Chat on WhatsApp</div>
+          <a className="wa-btn" href="https://wa.me/919816006300?text=Hi%20Shagun%20Studio!%20I%27d%20like%20to%20know%20more%20about%20your%20wedding%20photography%20packages." target="_blank" rel="noreferrer" aria-label="WhatsApp">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.849L.057 23.552a.5.5 0 0 0 .6.601l5.788-1.515A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.826 9.826 0 0 1-5.009-1.371l-.36-.214-3.733.977.999-3.645-.235-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
+          </a>
+        </div>
 
         {/* FOOTER */}
         <footer className="foot">
