@@ -497,26 +497,21 @@ export default function ShagunStudio() {
           border-bottom: 1px solid rgba(184,134,11,0.1);
         }
 
-    .hero-bg {
-  position: absolute;
-  inset: 0;
-  background: url('/images/hero-bride.jpg') center 24% / cover no-repeat;
-  filter: brightness(0.98) saturate(1.02);
-  animation: heroSlow 25s ease-in-out infinite alternate;
-  transform: scale(1.03);
-}
+     .hero-bg {
+        position: absolute;
+           inset: 0;
+           background: url('/images/hero-bride.jpg') center/cover no-repeat;
+             transform: scale(1.03);
+                  animation: heroSlow 25s ease-in-out infinite alternate;
+             }
         @keyframes heroSlow {
           0% { transform: scale(1.05) translateX(0); }
           100% { transform: scale(1.15) translateX(-2%); }
         }
 
-        .hero-vignette {
-          position: absolute;
-          inset: 0;
-          background: 
-            radial-gradient(ellipse at center, rgba(255,255,255,0.02) 18%, rgba(188,168,138,0.06) 100%),
-            linear-gradient(to bottom, rgba(255,255,255,0.18) 0%, rgba(245,240,232,0.06) 34%, rgba(226,209,191,0.24) 100%);
-        }
+       .hero-vignette {
+  display: none;
+}
 
         /* Lens ring overlay on hero */
         .hero-lens {
