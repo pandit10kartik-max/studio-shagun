@@ -487,8 +487,8 @@ export default function ShagunStudio() {
 
         /* ===== HERO ===== */
         .hero {
-          position: relative;
-          height: clamp(340px, 48vh, 500px);
+          height: 100vh;
+
           padding: calc(var(--nav-height-desktop) + 16px) 0 32px;
           display: flex;
           align-items: center;
@@ -497,17 +497,14 @@ export default function ShagunStudio() {
           border-bottom: 1px solid rgba(184,134,11,0.1);
         }
 
-        .hero-bg {
-          position: absolute;
-          inset: 0;
-          background:
-            linear-gradient(180deg, rgba(255,253,249,0.16) 0%, rgba(250,245,236,0.1) 48%, rgba(244,237,226,0.18) 100%),
-            url('/images/hero-bride.jpg') center 24% / cover no-repeat;
-          filter: brightness(0.98) saturate(1.02);
-          animation: heroSlow 25s ease-in-out infinite alternate;
-          transform: scale(1.03);
-        }
-
+    .hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('/images/hero-bride.jpg') center 24% / cover no-repeat;
+  filter: brightness(0.98) saturate(1.02);
+  animation: heroSlow 25s ease-in-out infinite alternate;
+  transform: scale(1.03);
+}
         @keyframes heroSlow {
           0% { transform: scale(1.05) translateX(0); }
           100% { transform: scale(1.15) translateX(-2%); }
