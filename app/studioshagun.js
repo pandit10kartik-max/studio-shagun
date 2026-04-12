@@ -1421,7 +1421,7 @@ export default function ShagunStudio() {
     display: block;
   }
 .hero-bg-1 {
-  background-position: 35% center;
+  background-position: 55% center;
 }
 
 .hero-bg-2 {
