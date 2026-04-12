@@ -49,6 +49,7 @@ export default function ShagunStudio() {
   const [introComplete, setIntroComplete] = useState(false);
   const [splashPhase, setSplashPhase] = useState(0);
   const [visibleItems, setVisibleItems] = useState(new Set());
+  const [menuOpen, setMenuOpen] = useState(false);
   const galleryRef = useRef(null);
 
   const filtered = filter === "All"
@@ -401,89 +402,169 @@ export default function ShagunStudio() {
           overflow-x: hidden;
         }
 
-        /* ===== NAV ===== */
-        .nav {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 500;
-          background: rgba(13,13,13,0.98);
-          backdrop-filter: blur(24px);
-          border-bottom: 1px solid rgba(184,134,11,0.15);
-          padding: 24px 48px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          transition: all 0.5s ease;
-        }
+   /* ===== NAV ===== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  background: transparent;
+  backdrop-filter: blur(0px);
+  padding: 28px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.5s ease;
+  border-bottom: 1px solid transparent;
+}
 
-        .nav.scrolled {
-          padding: 16px 48px;
-        }
+.nav.scrolled {
+  background: rgba(13,13,13,0.95);
+  backdrop-filter: blur(24px);
+  padding: 16px 48px;
+  border-bottom: 1px solid rgba(184,134,11,0.15);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
 
-        .nav-brand {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-        .nav-camera-icon {
-          opacity: 0.8;
-          animation: cameraFloat 4s ease-in-out infinite;
-        }
+.nav-camera-icon {
+  opacity: 0.8;
+  animation: cameraFloat 4s ease-in-out infinite;
+}
 
-        @keyframes cameraFloat {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          25% { transform: translateY(-3px) rotate(-2deg); }
-          75% { transform: translateY(2px) rotate(1deg); }
-        }
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--white);
+}
 
-        .nav-logo {
-          font-family: 'Playfair Display', serif;
-          font-size: 20px;
-          font-weight: 500;
-          letter-spacing: 4px;
-          text-transform: uppercase;
-          color: var(--white);
-        }
+.nav-logo span {
+  color: var(--gold);
+  font-style: italic;
+}
 
-        .nav-logo span {
-          color: var(--gold);
-          font-style: italic;
-        }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
 
-        .nav-links {
-          display: flex;
-          gap: 36px;
-          list-style: none;
-        }
+.nav-links a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 300;
+  transition: all 0.3s;
+  position: relative;
+  cursor: pointer;
+}
 
-        .nav-links a {
-          color: rgba(255,255,255,0.5);
-          text-decoration: none;
-          font-size: 11px;
-          letter-spacing: 3px;
-          text-transform: uppercase;
-          font-weight: 300;
-          transition: all 0.3s;
-          position: relative;
-          cursor: pointer;
-        }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.4s ease;
+}
 
-        .nav-links a::after {
-          content: '';
-          position: absolute;
-          bottom: -4px;
-          left: 0;
-          width: 0;
-          height: 1px;
-          background: var(--gold);
-          transition: width 0.4s ease;
-        }
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
 
-        .nav-links a:hover { color: var(--gold); }
-        .nav-links a:hover::after { width: 100%; }
+/* Book Now CTA Button */
+.nav-cta {
+  background: var(--gold) !important;
+  color: var(--dark) !important;
+  padding: 10px 24px;
+  border-radius: 0;
+  font-weight: 500 !important;
+  letter-spacing: 2px !important;
+  transition: all 0.4s ease !important;
+  border: 1px solid var(--gold);
+}
+
+.nav-cta:hover {
+  background: transparent !important;
+  color: var(--gold) !important;
+}
+
+.nav-cta::after { display: none !important; }
+
+/* Hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 600;
+}
+
+.ham-line {
+  display: block;
+  width: 28px;
+  height: 1.5px;
+  background: var(--gold);
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.ham-line.open:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.ham-line.open:nth-child(2) { opacity: 0; }
+.ham-line.open:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  
+  .nav-hamburger { display: flex; }
+  
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: rgba(13,13,13,0.98);
+    backdrop-filter: blur(24px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    padding: 40px;
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-left: 1px solid rgba(184,134,11,0.15);
+  }
+
+  .nav-links.open { right: 0; }
+
+  .nav-links a {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .nav-cta {
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+}
 
         /* ===== HERO ===== */
         .hero {
@@ -1273,12 +1354,40 @@ export default function ShagunStudio() {
         }
 
         @media (max-width: 768px) {
-          .nav-links { display: none; }
-          .nav { padding: 16px 20px; }
-          .hero {
-            height: clamp(280px, 40vh, 360px);
-            padding: calc(var(--nav-height-mobile) + 12px) 0 18px;
-          }
+  .nav { padding: 16px 20px; }
+
+  .nav-hamburger { display: flex; }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: rgba(13,13,13,0.98);
+    backdrop-filter: blur(24px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    padding: 40px;
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-left: 1px solid rgba(184,134,11,0.15);
+  }
+
+  .nav-links.open { right: 0; }
+
+  .nav-links a {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .nav-cta {
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+}
           .hero-lens {
             width: min(220px, 60vw);
             height: min(220px, 60vw);
@@ -1347,16 +1456,22 @@ export default function ShagunStudio() {
       <div className="app">
         {/* NAV */}
         <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-          <div className="nav-brand">
-            <div className="nav-camera-icon"><CameraIcon size={22} color="var(--gold)" /></div>
-            <div className="nav-logo">Shagun <span>Studio</span></div>
-          </div>
-          <ul className="nav-links">
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
+  <div className="nav-brand">
+    <div className="nav-camera-icon"><CameraIcon size={22} color="var(--gold)" /></div>
+    <div className="nav-logo">Shagun <span>Studio</span></div>
+  </div>
+  <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+    <li><a href="#portfolio" onClick={() => setMenuOpen(false)}>Portfolio</a></li>
+    <li><a href="#about" onClick={() => setMenuOpen(false)}>About</a></li>
+    <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
+    <li><a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>Book Now</a></li>
+  </ul>
+  <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+    <span className={`ham-line ${menuOpen ? 'open' : ''}`} />
+    <span className={`ham-line ${menuOpen ? 'open' : ''}`} />
+    <span className={`ham-line ${menuOpen ? 'open' : ''}`} />
+  </button>
+</nav>
 
         {/* HERO */}
         <section className="hero">
