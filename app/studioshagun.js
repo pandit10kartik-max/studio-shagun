@@ -595,7 +595,7 @@ export default function ShagunStudio() {
         .hero {
           height: 100vh;
 
-          padding: calc(var(--nav-height-desktop) + 16px) 0 32px;
+          padding: 70px 0 32px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -638,14 +638,9 @@ export default function ShagunStudio() {
 }
 
         /* Lens ring overlay on hero */
-        .hero-lens {
-          position: absolute;
-          width: min(300px, 54vw);
-          height: min(300px, 54vw);
-          border: 1px solid rgba(184,134,11,0.24);
-          border-radius: 50%;
-          animation: lensRotate 30s linear infinite;
-        }
+    .hero-lens {
+  display: none;
+}
 
         .hero-lens::before {
           content: '';
@@ -722,15 +717,10 @@ export default function ShagunStudio() {
         }
 
         .hero-content {
-          position: relative;
-          z-index: 2;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
-        }
+  position: absolute;
+  bottom: 80px;
+  z-index: 10;
+}
 
         .hero-cam-icon {
           opacity: 0;
@@ -1431,11 +1421,11 @@ export default function ShagunStudio() {
     display: block;
   }
 .hero-bg-1 {
-  background-position: 30% center;
+  background-position: 35% center;
 }
 
 .hero-bg-2 {
-  background-position: 35% center;
+  background-position: 40% top;
 }
           .hero-lens {
             width: min(220px, 60vw);
@@ -1443,15 +1433,16 @@ export default function ShagunStudio() {
           }
           .hero-logo-img { width: clamp(220px, 52vw, 280px); }
           .hero-shutter-btn { margin-top: 4px; }
-          .hero-shutter-btn .shutter-svg {
-            width: 34px;
-            height: 34px;
-          }
-          .shutter-text {
-            font-size: 8px;
-            letter-spacing: 2.4px;
-            margin-top: 3px;
-          }
+         .hero-shutter-btn .shutter-svg {
+  width: 44px;
+  height: 44px;
+}
+        .shutter-text {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--white);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
           .hero-gallery-transition { height: 30px; }
           .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
           .about-section { padding: 60px 24px; gap: 40px; }
