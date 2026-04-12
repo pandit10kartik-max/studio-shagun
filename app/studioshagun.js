@@ -598,6 +598,8 @@ export default function ShagunStudio() {
 
 .hero-bg-2 {
   background-image: url(/images/hero-bride-2.jpg);
+  background-size: 70%;
+  background-position: center;
   animation: fadeSlide 10s ease-in-out 5s infinite;
 }
 
@@ -1411,7 +1413,7 @@ export default function ShagunStudio() {
 }
 
 .hero-bg-2 {
-  background-position: 45% center;
+  background-position: 35% center;
 }
           .hero-lens {
             width: min(220px, 60vw);
