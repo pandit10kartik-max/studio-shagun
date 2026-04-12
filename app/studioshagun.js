@@ -2543,7 +2543,7 @@ export default function ShagunStudio() {
             <form className="booking-form" onSubmit={e => {
               e.preventDefault();
               const msg = `Hi Shagun Studio! 🌸\n\nI'd like to book a session.\n\n👤 Name: ${bookForm.name}\n📞 Phone: ${bookForm.phone}\n💍 Wedding Date: ${bookForm.date || 'Not decided yet'}\n📦 Package: ${bookForm.package || 'To discuss'}\n\n💬 ${bookForm.message || 'Looking forward to hearing from you!'}`;
-              window.open(`https://wa.me/919816006300?text=${encodeURIComponent(msg)}`, '_blank');
+              window.open(`https://wa.me/8091762365?text=${encodeURIComponent(msg)}`, '_blank');
             }}>
               <div className="form-group">
                 <label className="form-label">Your Name</label>
