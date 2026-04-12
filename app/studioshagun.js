@@ -18,6 +18,85 @@ const weddingImages = [
 
 const categories = ["All", "Portraits", "Ceremony", "Reception", "Details"];
 
+const pricingTabs = ["Single Day", "Combo"];
+
+const pricingData = {
+  "Single Day": [
+    {
+      name: "Traditional",
+      price: "45,000",
+      badge: null,
+      highlight: false,
+      features: [
+        "One Videographer",
+        "One Photographer",
+        "200 Edited High-Resolution Photos",
+        "Online Gallery for Sharing & Downloading",
+        "40 Sheets Album",
+        "Full Video H.D.",
+      ],
+    },
+    {
+      name: "Gold",
+      price: "85,000",
+      badge: "Most Popular",
+      highlight: true,
+      features: [
+        "Full Wedding Coverage",
+        "Four Photographers",
+        "400 Edited High-Resolution Photos",
+        "50-Page Premium Printed Photo Album",
+        "Traditional Photography",
+        "Traditional Videography",
+        "Cinematic Videography",
+        "Online Gallery for Sharing & Downloading",
+        "Drone Videography",
+        "Wedding Video Teaser",
+        "Wedding Video Highlights",
+        "Full H.D. Traditional Video",
+        "12×30 Photo Frame Gift",
+      ],
+    },
+  ],
+  "Combo": [
+    {
+      name: "Silver",
+      price: "80,000",
+      badge: null,
+      highlight: false,
+      features: [
+        "One Videographer",
+        "One Photographer",
+        "400 Edited High-Resolution Photos",
+        "Online Gallery for Sharing & Downloading",
+        "40 Sheets Album",
+        "Full Video H.D.",
+      ],
+    },
+    {
+      name: "Gold",
+      price: "1,40,000",
+      badge: "Best Value",
+      highlight: true,
+      features: [
+        "Full Wedding Coverage",
+        "Four Photographers",
+        "400 Edited High-Resolution Photos",
+        "50-Page Premium Printed 2 Photo Albums",
+        "Traditional Photography",
+        "Traditional Videography",
+        "Cinematic Videography",
+        "Online Gallery for Sharing & Downloading",
+        "Drone Videography",
+        "Wedding Video Teaser",
+        "Wedding Video Highlights",
+        "Full H.D. Traditional Video",
+        "2×20×30 Photo Frame Gift",
+      ],
+    },
+  ],
+};
+
 // Camera SVG icon
 const CameraIcon = ({ size = 24, color = "currentColor" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -42,6 +121,7 @@ const ShutterIcon = () => (
 
 export default function ShagunStudio() {
   const [filter, setFilter] = useState("All");
+  const [pricingTab, setPricingTab] = useState("Single Day");
   const [lightbox, setLightbox] = useState({ open: false, index: 0 });
   const [scrolled, setScrolled] = useState(false);
   const [flash, setFlash] = useState(false);
@@ -1361,6 +1441,358 @@ export default function ShagunStudio() {
           z-index: 10;
         }
 
+        /* ===== PRICING ===== */
+        .pricing-section {
+          background: var(--cream);
+          padding: 100px 24px 110px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .pricing-section::before {
+          content: '';
+          position: absolute;
+          top: -1px; left: 0; right: 0;
+          height: 1px;
+          background: linear-gradient(to right, transparent, var(--gold), transparent);
+          opacity: 0.4;
+        }
+
+        .pricing-tabs {
+          display: flex;
+          justify-content: center;
+          gap: 0;
+          margin-bottom: 56px;
+          border: 1px solid var(--blush);
+          width: fit-content;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .pricing-tab {
+          padding: 12px 40px;
+          background: transparent;
+          border: none;
+          font-family: 'Outfit', sans-serif;
+          font-size: 10px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: var(--warm);
+          cursor: pointer;
+          transition: all 0.35s ease;
+        }
+
+        .pricing-tab.active {
+          background: var(--dark);
+          color: var(--gold);
+        }
+
+        .pricing-grid {
+          display: flex;
+          justify-content: center;
+          gap: 24px;
+          max-width: 900px;
+          margin: 0 auto 64px;
+          flex-wrap: wrap;
+        }
+
+        .pricing-card {
+          background: var(--white);
+          border: 1px solid var(--blush);
+          padding: 44px 36px 40px;
+          flex: 1;
+          min-width: 280px;
+          max-width: 400px;
+          position: relative;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+        }
+
+        .pricing-card.featured {
+          background: var(--dark);
+          border-color: rgba(184,134,11,0.35);
+          box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+        }
+
+        .pricing-card.featured:hover {
+          box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .pricing-badge {
+          position: absolute;
+          top: -1px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: var(--gold);
+          color: var(--dark);
+          font-size: 8px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          padding: 5px 18px;
+          font-weight: 600;
+          white-space: nowrap;
+        }
+
+        .pricing-name {
+          font-family: 'Playfair Display', serif;
+          font-size: 26px;
+          font-weight: 400;
+          color: var(--dark);
+          margin-bottom: 6px;
+        }
+
+        .pricing-card.featured .pricing-name { color: var(--white); }
+
+        .pricing-name em { font-style: italic; color: var(--gold); }
+
+        .pricing-price-wrap {
+          display: flex;
+          align-items: baseline;
+          gap: 4px;
+          margin: 20px 0 28px;
+          padding-bottom: 24px;
+          border-bottom: 1px solid var(--blush);
+        }
+
+        .pricing-card.featured .pricing-price-wrap {
+          border-bottom-color: rgba(255,255,255,0.08);
+        }
+
+        .pricing-rs {
+          font-size: 13px;
+          color: var(--gold);
+          font-weight: 300;
+          letter-spacing: 1px;
+        }
+
+        .pricing-amount {
+          font-family: 'Playfair Display', serif;
+          font-size: 38px;
+          font-weight: 400;
+          color: var(--dark);
+          line-height: 1;
+        }
+
+        .pricing-card.featured .pricing-amount { color: var(--white); }
+
+        .pricing-features {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .pricing-features li {
+          font-size: 13px;
+          color: var(--warm);
+          font-weight: 300;
+          padding-left: 18px;
+          position: relative;
+          line-height: 1.4;
+        }
+
+        .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.55); }
+
+        .pricing-features li::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 7px;
+          width: 6px;
+          height: 1px;
+          background: var(--gold);
+        }
+
+        .pricing-cta {
+          margin-top: 36px;
+          width: 100%;
+          padding: 14px;
+          border: 1px solid var(--blush);
+          background: transparent;
+          font-family: 'Outfit', sans-serif;
+          font-size: 10px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: var(--warm);
+          cursor: pointer;
+          transition: all 0.35s ease;
+        }
+
+        .pricing-cta:hover {
+          background: var(--dark);
+          border-color: var(--dark);
+          color: var(--gold);
+        }
+
+        .pricing-card.featured .pricing-cta {
+          border-color: var(--gold);
+          color: var(--gold);
+        }
+
+        .pricing-card.featured .pricing-cta:hover {
+          background: var(--gold);
+          color: var(--dark);
+        }
+
+        /* Additional services cards */
+        .pricing-addons-wrap {
+          max-width: 900px;
+          margin: 0 auto;
+        }
+
+        .pricing-addons-title {
+          font-size: 9px;
+          letter-spacing: 5px;
+          text-transform: uppercase;
+          color: var(--gold);
+          text-align: center;
+          margin-bottom: 28px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 14px;
+        }
+
+        .pricing-addons-title::before,
+        .pricing-addons-title::after {
+          content: '';
+          width: 36px;
+          height: 1px;
+          background: var(--gold);
+          opacity: 0.5;
+        }
+
+        .pricing-addons-grid {
+          display: flex;
+          gap: 20px;
+          flex-wrap: wrap;
+        }
+
+        .pricing-addon-card {
+          flex: 1;
+          min-width: 280px;
+          background: var(--white);
+          border: 1px solid var(--blush);
+          padding: 32px 28px;
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-addon-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 12px 36px rgba(0,0,0,0.07);
+        }
+
+        .pricing-addon-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0;
+          width: 3px;
+          height: 100%;
+          background: var(--gold);
+          opacity: 0.6;
+        }
+
+        .pricing-addon-card-name {
+          font-family: 'Playfair Display', serif;
+          font-size: 20px;
+          font-weight: 400;
+          color: var(--dark);
+          margin-bottom: 4px;
+        }
+
+        .pricing-addon-card-name em { font-style: italic; color: var(--gold); }
+
+        .pricing-addon-card-price {
+          display: flex;
+          align-items: baseline;
+          gap: 4px;
+          margin: 16px 0 20px;
+          padding-bottom: 18px;
+          border-bottom: 1px solid var(--blush);
+        }
+
+        .pricing-addon-card-rs {
+          font-size: 11px;
+          color: var(--gold);
+          letter-spacing: 1px;
+        }
+
+        .pricing-addon-card-amount {
+          font-family: 'Playfair Display', serif;
+          font-size: 32px;
+          font-weight: 400;
+          color: var(--dark);
+          line-height: 1;
+        }
+
+        .pricing-addon-features {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-bottom: 24px;
+        }
+
+        .pricing-addon-features li {
+          font-size: 12px;
+          color: var(--warm);
+          font-weight: 300;
+          padding-left: 16px;
+          position: relative;
+          line-height: 1.4;
+        }
+
+        .pricing-addon-features li::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 6px;
+          width: 6px;
+          height: 1px;
+          background: var(--gold);
+        }
+
+        .pricing-addon-book {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid var(--blush);
+          background: transparent;
+          font-family: 'Outfit', sans-serif;
+          font-size: 9px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: var(--warm);
+          cursor: pointer;
+          transition: all 0.35s ease;
+        }
+
+        .pricing-addon-book:hover {
+          background: var(--dark);
+          border-color: var(--dark);
+          color: var(--gold);
+        }
+
+        .pricing-note {
+          text-align: center;
+          margin-top: 28px;
+          font-size: 9px;
+          letter-spacing: 2px;
+          color: rgba(0,0,0,0.28);
+          text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+          .pricing-section { padding: 72px 16px 80px; }
+          .pricing-card { min-width: 100%; padding: 36px 24px 32px; }
+          .pricing-addon-card { min-width: 100%; }
+        }
+
         /* ===== ABOUT ===== */
         .about-section {
           background: var(--dark);
@@ -1664,6 +2096,7 @@ export default function ShagunStudio() {
 </div>
   <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
     <li><a href="#portfolio" onClick={() => setMenuOpen(false)}>Portfolio</a></li>
+    <li><a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a></li>
     <li><a href="#about" onClick={() => setMenuOpen(false)}>About</a></li>
     <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
     <li><a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>Book Now</a></li>
@@ -1789,6 +2222,96 @@ export default function ShagunStudio() {
               <div><div className="stat-n">15</div><div className="stat-l">Awards</div></div>
             </div>
           </div>
+        </section>
+
+        {/* PRICING */}
+        <section className="pricing-section" id="pricing">
+          <div className="section-head">
+            <div className="section-tag"><CameraIcon size={14} color="var(--gold)" /> Wedding Packages</div>
+            <h2 className="section-h2">Our <em>Packages</em></h2>
+          </div>
+
+          <div className="pricing-tabs">
+            {pricingTabs.map(tab => (
+              <button
+                key={tab}
+                className={`pricing-tab ${pricingTab === tab ? 'active' : ''}`}
+                onClick={() => setPricingTab(tab)}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          <div className="pricing-grid">
+            {pricingData[pricingTab].map(pkg => (
+              <div key={pkg.name} className={`pricing-card ${pkg.highlight ? 'featured' : ''}`}>
+                {pkg.badge && <div className="pricing-badge">{pkg.badge}</div>}
+                <div className="pricing-name"><em>{pkg.name}</em> Package</div>
+                <div className="pricing-price-wrap">
+                  <span className="pricing-rs">RS.</span>
+                  <span className="pricing-amount">{pkg.price}</span>
+                </div>
+                <ul className="pricing-features">
+                  {pkg.features.map((f, i) => <li key={i}>{f}</li>)}
+                </ul>
+                <button className="pricing-cta" onClick={() => {
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}>
+                  Book This Package
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="pricing-addons-wrap">
+            <div className="pricing-addons-title">Additional Services</div>
+            <div className="pricing-addons-grid">
+
+              {/* Engagement Shoot */}
+              <div className="pricing-addon-card">
+                <div className="pricing-addon-card-name"><em>Engagement</em> Shoot</div>
+                <div className="pricing-addon-card-price">
+                  <span className="pricing-addon-card-rs">RS.</span>
+                  <span className="pricing-addon-card-amount">35,000</span>
+                </div>
+                <ul className="pricing-addon-features">
+                  <li>Professional Photographer & Videographer</li>
+                  <li>200 Edited High-Resolution Photos</li>
+                  <li>Cinematic Engagement Video</li>
+                  <li>Curated Location & Theme Guidance</li>
+                  <li>Online Gallery for Sharing & Downloading</li>
+                  <li>Same-Day Preview Reel</li>
+                </ul>
+                <button className="pricing-addon-book" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Book This Shoot
+                </button>
+              </div>
+
+              {/* Pre-Wedding Shoot */}
+              <div className="pricing-addon-card">
+                <div className="pricing-addon-card-name"><em>Pre-Wedding</em> Shoot</div>
+                <div className="pricing-addon-card-price">
+                  <span className="pricing-addon-card-rs">RS.</span>
+                  <span className="pricing-addon-card-amount">45,000</span>
+                </div>
+                <ul className="pricing-addon-features">
+                  <li>Dedicated Lead Photographer & Cinematographer</li>
+                  <li>400 Edited High-Resolution Photos</li>
+                  <li>Full Cinematic Pre-Wedding Film</li>
+                  <li>Outfit Changes & Multiple Locations</li>
+                  <li>Drone Aerial Shots</li>
+                  <li>Premium Photo Album (20 Pages)</li>
+                  <li>Online Gallery for Sharing & Downloading</li>
+                </ul>
+                <button className="pricing-addon-book" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Book This Shoot
+                </button>
+              </div>
+
+            </div>
+          </div>
+          <p className="pricing-note">60% advance payment required · 10% off on full advance payment</p>
         </section>
 
         {/* CTA */}
