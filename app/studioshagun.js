@@ -32,10 +32,16 @@ const FacebookIcon = () => (
   </svg>
 );
 
+const YoutubeIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M19.615 3.184c-3.604-.246-11.633-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.604.245 11.633.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10 13V8l5.5 2.75z"/>
+  </svg>
+);
+
 const socialLinks = [
-  { label: "Instagram", handle: "@photostudioshagun", href: "https://www.instagram.com/photostudioshagun/", icon: "instagram" },
-  { label: "Facebook", handle: "Subhashdra", href: "https://www.facebook.com/subhashdra/", icon: "facebook" },
-  { label: "Studio Shagun Mandi", handle: "@studio_shagun_mandi", href: "https://www.instagram.com/studio_shagun_mandi/", icon: "instagram" },
+  { label: "Instagram", href: "https://www.instagram.com/photostudioshagun/", icon: "instagram" },
+  { label: "Facebook", href: "https://www.facebook.com/subhashdra/", icon: "facebook" },
+  { label: "YouTube", href: "https://www.youtube.com/c/STUDIOSHAGUNMANDI", icon: "youtube" },
 ];
 
 const pricingData = {
@@ -2669,7 +2675,7 @@ export default function ShagunStudio() {
           <div className="foot-socials">
             {socialLinks.map(link => (
               <a key={link.href} href={link.href} target="_blank" rel="noreferrer" aria-label={link.label}>
-                {link.icon === "instagram" ? <InstagramIcon /> : <FacebookIcon />}
+                {link.icon === "instagram" ? <InstagramIcon /> : link.icon === "youtube" ? <YoutubeIcon /> : <FacebookIcon />}
                 <span>{link.label}</span>
               </a>
             ))}
