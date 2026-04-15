@@ -20,6 +20,12 @@ const categories = ["All", "Portraits", "Ceremony", "Reception", "Details"];
 
 const pricingTabs = ["Single Day", "Combo"];
 
+const socialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/photostudioshagun/" },
+  { label: "Facebook", href: "https://www.facebook.com/subhashdra/" },
+  { label: "Studio Shagun Mandi", href: "https://www.instagram.com/studio_shagun_mandi/" },
+];
+
 const pricingData = {
   "Single Day": [
     {
@@ -2177,6 +2183,34 @@ export default function ShagunStudio() {
           color: rgba(255,255,255,0.2);
         }
 
+        .foot-socials {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin: 18px 0 16px;
+        }
+
+        .foot-socials a {
+          border: 1px solid rgba(184,134,11,0.24);
+          color: rgba(255,255,255,0.72);
+          text-decoration: none;
+          font-size: 10px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          padding: 10px 14px;
+          border-radius: 999px;
+          transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+          background: rgba(255,255,255,0.02);
+        }
+
+        .foot-socials a:hover {
+          transform: translateY(-2px);
+          border-color: rgba(184,134,11,0.65);
+          color: var(--white);
+          background: rgba(184,134,11,0.08);
+        }
+
         @media (max-width: 768px) {
   .nav { padding: 16px 20px; }
 
@@ -2611,6 +2645,13 @@ export default function ShagunStudio() {
           <div className="foot-brand">
             <CameraIcon size={18} color="var(--gold)" />
             <div className="foot-logo">Shagun <span>Studio</span></div>
+          </div>
+          <div className="foot-socials">
+            {socialLinks.map(link => (
+              <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+                {link.label}
+              </a>
+            ))}
           </div>
           <p>&copy; 2026 Shagun Studio. All rights reserved.</p>
         </footer>
